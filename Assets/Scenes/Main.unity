@@ -222,8 +222,8 @@ MonoBehaviour:
   cameraTarget: {fileID: 745799707}
   distanceToObject: 5
   rotationSpeed: 5
-  shiftSpeed: 5
-  scaleSpeed: 5
+  shiftSpeed: 1
+  scaleSpeed: 40
 --- !u!1 &745799706
 GameObject:
   m_ObjectHideFlags: 0

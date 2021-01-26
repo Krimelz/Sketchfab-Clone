@@ -36,14 +36,19 @@ public class CameraControls : MonoBehaviour
             Vector2 firstTouchDelta = Input.GetTouch(0).deltaPosition;
             Vector2 secondTouchDelta = Input.GetTouch(1).deltaPosition;
 
-            float dot = Vector2.Dot(firstTouchDelta.normalized, secondTouchDelta.normalized);
-            Debug.Log(dot);
+            if (firstTouchDelta.magnitude <= 5f)
+                firstTouchDelta = new Vector2(0f, 0f);
 
-            if (dot <= 0.5f)
+            if (secondTouchDelta.magnitude <= 5f)
+                secondTouchDelta = new Vector2(0f, 0f);
+
+            float dot = Vector2.Dot(firstTouchDelta.normalized, secondTouchDelta.normalized);
+
+            if (dot <= -0.2f)
             {
                 Scale();
             }
-            else
+            else if (dot >= 0.6f)
             {
                 Shift();
             }  
@@ -74,11 +79,16 @@ public class CameraControls : MonoBehaviour
 
         if (oldDistance > newDistance)
         {
-            offset.z -= scaleSpeed * Time.deltaTime;
+            offset.z += scaleSpeed * Time.deltaTime;
         }
         else if (oldDistance < newDistance)
         {
-            offset.z += scaleSpeed * Time.deltaTime;
+            offset.z -= scaleSpeed * Time.deltaTime;
+        }
+
+        if (offset.z <= 0.05f)
+        {
+            offset.z = 0.05f;
         }
 
         transform.position = cameraTarget.position - (rotation * offset);
@@ -90,7 +100,7 @@ public class CameraControls : MonoBehaviour
         shiftX = Input.GetTouch(0).deltaPosition.x * shiftSpeed * Time.deltaTime;
         shiftY = Input.GetTouch(0).deltaPosition.y * shiftSpeed * Time.deltaTime;
 
-        Vector3 shift = new Vector3(shiftX, shiftY, 0f);
+        Vector3 shift = new Vector3(-shiftX, -shiftY, 0f);
 
         cameraTarget.Translate(shift);
         transform.Translate(shift);
