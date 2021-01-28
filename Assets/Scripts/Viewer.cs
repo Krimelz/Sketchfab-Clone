@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControls : MonoBehaviour
+public class Viewer : MonoBehaviour
 {
-    public Transform cameraTarget;
-    public float distanceToObject = 5f;
+    public float distanceToObject = -5f;
     public float rotationSpeed = 5f;
     public float shiftSpeed = 5f;
     public float scaleSpeed = 5f;
 
     private Quaternion rotation;
-    private Vector3 offset;
-    private Vector3 targetPos;
+    [SerializeField]
+    private Vector3 shift;
+    private Camera mainCamera;
+    [SerializeField]
     private float rotationX;
+    [SerializeField]
     private float rotationY;
     private float shiftX;
     private float shiftY;
@@ -21,14 +23,16 @@ public class CameraControls : MonoBehaviour
 
     void Start()
     {
-        offset.z = distanceToObject;
-        targetPos = transform.position = cameraTarget.position - offset;
-        transform.LookAt(cameraTarget);
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 0)
+        {
+            oldDistance = 0f;
+        }
+        else if (Input.touchCount == 1)
         {
             Rotate();
         }
@@ -52,13 +56,23 @@ public class CameraControls : MonoBehaviour
             else if (dot >= 0.6f)
             {
                 Shift();
-            }  
+            }
         }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-        //transform.position = Vector3.Lerp(transform.position, targetPos, rotationSpeed * Time.deltaTime);
-        //transform.LookAt(cameraTarget);
-        cameraTarget.rotation = rotation;
+        transform.position = Vector3.Slerp(
+            transform.position,
+            shift, 
+            shiftSpeed * Time.deltaTime);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            rotation,
+            rotationSpeed * Time.deltaTime);
+
+        mainCamera.transform.localPosition = new Vector3(
+            0f,
+            0f,
+            Mathf.Lerp(mainCamera.transform.localPosition.z, distanceToObject, scaleSpeed * Time.deltaTime));
     }
 
     private void Rotate()
@@ -66,11 +80,9 @@ public class CameraControls : MonoBehaviour
         rotationX -= Input.GetTouch(0).deltaPosition.y * rotationSpeed * Time.deltaTime;
         rotationY += Input.GetTouch(0).deltaPosition.x * rotationSpeed * Time.deltaTime;
 
-        rotationX = Mathf.Clamp(rotationX, -89f, 89f);
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
         rotation = Quaternion.Euler(rotationX, rotationY, 0f);
-
-        //targetPos = cameraTarget.position - (rotation * offset);
     }
 
     private void Scale()
@@ -82,32 +94,26 @@ public class CameraControls : MonoBehaviour
 
         if (oldDistance > newDistance)
         {
-            offset.z += scaleSpeed * Time.deltaTime;
+            distanceToObject -= scaleSpeed * Time.deltaTime;
         }
         else if (oldDistance < newDistance)
         {
-            offset.z -= scaleSpeed * Time.deltaTime;
+            distanceToObject += scaleSpeed * Time.deltaTime;
         }
 
-        if (offset.z <= 0.05f)
+        if (distanceToObject >= -0.05f)
         {
-            offset.z = 0.05f;
+            distanceToObject = -0.05f;
         }
 
-        targetPos = cameraTarget.position - (rotation * offset);
         oldDistance = newDistance;
-    }   
+    }
 
     private void Shift()
     {
-        shiftX = Input.GetTouch(0).deltaPosition.x * shiftSpeed * Time.deltaTime;
-        shiftY = Input.GetTouch(0).deltaPosition.y * shiftSpeed * Time.deltaTime;
+        shiftX += Input.GetTouch(0).deltaPosition.x * shiftSpeed * Time.deltaTime;
+        shiftY += Input.GetTouch(0).deltaPosition.y * shiftSpeed * Time.deltaTime;
 
-        Vector3 shift = new Vector3(shiftX, shiftY, 0f);
-
-        //transform.Translate(-shift);
-        cameraTarget.Translate(-shift);
-
-        targetPos = transform.position;
+        shift = rotation * new Vector3(-shiftX, -shiftY, 0f);
     }
 }
