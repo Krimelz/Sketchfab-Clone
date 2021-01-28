@@ -5,17 +5,19 @@ using UnityEngine;
 public class Viewer : MonoBehaviour
 {
     public float distanceToObject = -5f;
+    [Space]
     public float rotationSpeed = 5f;
-    public float shiftSpeed = 5f;
-    public float scaleSpeed = 5f;
+    public float shiftSpeed = 1f;
+    public float scaleSpeed = 10f;
+    [Space]
+    public float rotationLerp = 5f;
+    public float shiftLerp = 5f;
+    public float scaleLerp = 5f;
 
     private Quaternion rotation;
-    [SerializeField]
     private Vector3 shift;
     private Camera mainCamera;
-    [SerializeField]
     private float rotationX;
-    [SerializeField]
     private float rotationY;
     private float shiftX;
     private float shiftY;
@@ -59,20 +61,20 @@ public class Viewer : MonoBehaviour
             }
         }
 
-        transform.position = Vector3.Slerp(
+        transform.position = Vector3.Lerp(
             transform.position,
             shift, 
-            shiftSpeed * Time.deltaTime);
+            shiftLerp * Time.deltaTime);
 
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             rotation,
-            rotationSpeed * Time.deltaTime);
+            rotationLerp * Time.deltaTime);
 
         mainCamera.transform.localPosition = new Vector3(
             0f,
             0f,
-            Mathf.Lerp(mainCamera.transform.localPosition.z, distanceToObject, scaleSpeed * Time.deltaTime));
+            Mathf.Lerp(mainCamera.transform.localPosition.z, distanceToObject, scaleLerp * Time.deltaTime));
     }
 
     private void Rotate()
@@ -94,11 +96,11 @@ public class Viewer : MonoBehaviour
 
         if (oldDistance > newDistance)
         {
-            distanceToObject -= scaleSpeed * Time.deltaTime;
+            distanceToObject -= scaleSpeed * Time.deltaTime * 10f;
         }
         else if (oldDistance < newDistance)
         {
-            distanceToObject += scaleSpeed * Time.deltaTime;
+            distanceToObject += scaleSpeed * Time.deltaTime * 10f;
         }
 
         if (distanceToObject >= -0.05f)

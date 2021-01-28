@@ -254,9 +254,9 @@ MonoBehaviour:
   rotationSpeed: 5
   shiftSpeed: 5
   scaleSpeed: 10
-  shift: {x: 0, y: 0, z: 0}
-  rotationX: 0
-  rotationY: 0
+  rotationLerp: 5
+  shiftLerp: 5
+  scaleLerp: 5
 --- !u!1 &1838814723
 GameObject:
   m_ObjectHideFlags: 0
