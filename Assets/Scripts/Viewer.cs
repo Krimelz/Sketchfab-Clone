@@ -8,7 +8,7 @@ public class Viewer : MonoBehaviour
     [Space]
     public float rotationSpeed = 5f;
     public float shiftSpeed = 1f;
-    public float scaleSpeed = 10f;
+    public float scaleSpeed = 1f;
     [Space]
     public float rotationLerp = 5f;
     public float shiftLerp = 5f;
@@ -32,9 +32,9 @@ public class Viewer : MonoBehaviour
     {
         if (Input.touchCount == 0)
         {
-            oldDistance = 0f;
+            oldDistance = -1f;
         }
-        else if (Input.touchCount == 1)
+        if (Input.touchCount == 1)
         {
             Rotate();
         }
@@ -43,19 +43,13 @@ public class Viewer : MonoBehaviour
             Vector2 firstTouchDelta = Input.GetTouch(0).deltaPosition;
             Vector2 secondTouchDelta = Input.GetTouch(1).deltaPosition;
 
-            if (firstTouchDelta.magnitude <= 5f)
-                firstTouchDelta = Vector2.zero;
-
-            if (secondTouchDelta.magnitude <= 5f)
-                secondTouchDelta = Vector2.zero;
-
             float dot = Vector2.Dot(firstTouchDelta.normalized, secondTouchDelta.normalized);
 
-            if (dot <= -0.4f)
+            if (dot <= -0.8f)
             {
                 Scale();
             }
-            else if (dot >= 0.6f)
+            else if (dot >= 0.8f)
             {
                 Shift();
             }
@@ -94,13 +88,9 @@ public class Viewer : MonoBehaviour
 
         float newDistance = Vector2.Distance(firstTouchPos, secondTouchPos);
 
-        if (oldDistance > newDistance)
+        if (oldDistance > 0f)
         {
-            distanceToObject -= scaleSpeed * Time.deltaTime * 10f;
-        }
-        else if (oldDistance < newDistance)
-        {
-            distanceToObject += scaleSpeed * Time.deltaTime * 10f;
+            distanceToObject -= (oldDistance - newDistance) * scaleSpeed * Time.deltaTime;
         }
 
         if (distanceToObject >= -0.05f)
