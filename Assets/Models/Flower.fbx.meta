@@ -11,9 +11,9 @@ ModelImporter:
     second: {fileID: 2100000, guid: f8a03155b2078c347a620da4d3212672, type: 2}
   materials:
     materialImportMode: 2
-    materialName: 0
+    materialName: 1
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

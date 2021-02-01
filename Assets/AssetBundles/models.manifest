@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3761326453
+CRC: 2235303612
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9377385cdeaf3f7aba8107099b3cae9c
+    Hash: c24e15e937de0ddb8aae8ccf44119cda
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6e935cad40e8d56faed9d589efbfe208
@@ -28,10 +28,10 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Models/Fall Tree.fbx
-- Assets/Materials/Fall Tree Material.mat
-- Assets/Textures/FallTrunkTexture.png
-- Assets/Textures/Low Poly Palette.png
-- Assets/Materials/Low Poly Material.mat
+- Assets/Models/RedMushroom.fbx
+- Assets/Models/Mushroom.fbx
 - Assets/Models/Flower.fbx
-- Assets/Models/Big Spruce.fbx
+- Assets/Models/Bomberman.fbx
+- Assets/Models/Slime.fbx
+- Assets/Models/Saw.fbx
 Dependencies: []

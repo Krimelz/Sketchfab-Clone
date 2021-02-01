@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 4f3405d3e30466543a574c33947877eb
+guid: 88adc859a64f61f4dac1a84f1869c76d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: FallTrunk
-    second: {fileID: 2100000, guid: 7f31122f22b8c584a8b9e993438c8c23, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Low Poly Material
-    second: {fileID: 2100000, guid: f8a03155b2078c347a620da4d3212672, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 1

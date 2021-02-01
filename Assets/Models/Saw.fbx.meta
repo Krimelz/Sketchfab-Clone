@@ -1,19 +1,14 @@
 fileFormatVersion: 2
-guid: 9aaadf42b556fe14a8cee5d1ce7a2a4b
+guid: ae910ba46850d56478e603a1d4e067c6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Low Poly Material
-    second: {fileID: 2100000, guid: f8a03155b2078c347a620da4d3212672, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
-    materialName: 0
+    materialName: 1
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -103,5 +98,5 @@ ModelImporter:
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: models
   assetBundleVariant: 
