@@ -40,5 +40,6 @@ public class LoadAssetBundles : MonoBehaviour
         }
 
         currentGameObject = Instantiate(models.LoadAsset<GameObject>(dropdownList.captionText.text), transform.position, transform.rotation);
+        currentGameObject.GetComponent<MeshRenderer>().receiveShadows = false;
     }
 }

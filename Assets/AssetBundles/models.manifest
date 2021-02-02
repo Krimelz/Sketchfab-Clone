@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2235303612
+CRC: 2080242265
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c24e15e937de0ddb8aae8ccf44119cda
+    Hash: 2901d33b4ff7605b0c67d6d07e05c9c2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6e935cad40e8d56faed9d589efbfe208
@@ -27,7 +27,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Models/Fall Tree.fbx
 - Assets/Models/RedMushroom.fbx
 - Assets/Models/Mushroom.fbx
 - Assets/Models/Flower.fbx

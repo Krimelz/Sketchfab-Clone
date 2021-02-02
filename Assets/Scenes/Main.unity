@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1119f671fb31621418cee462feb63249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: http://192.168.0.101:25565/
+  url: http://192.168.50.70:25565/
   gameObjectsBundleName: models
   version: 0
   dropdownList: {fileID: 1347966369}
